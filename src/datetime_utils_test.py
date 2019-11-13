@@ -31,3 +31,17 @@ class Test(unittest.TestCase):
         dtime = dt.datetime(2019,11,7)
         dtime6 = datetime_utils.ceil(dtime, dt.datetime.day)
         assert dtime6 == dtime
+        dtime = dt.datetime(2019,11,7,13,59,36)
+        dtime6 = datetime_utils.ceil(dtime, dt.datetime.minute)
+        assert dtime6 == dt.datetime(2019,11,7,14,00)
+        dtime = dt.datetime(2019,11,7,23,59,36)
+        dtime6 = datetime_utils.ceil(dtime, dt.datetime.minute)
+        assert dtime6 == dt.datetime(2019,11,8,0,00)
+        dtime = dt.datetime(2019,11,30,23,59,36)
+        dtime6 = datetime_utils.ceil(dtime, dt.datetime.minute)
+        assert dtime6 == dt.datetime(2019,12,1,0,00)
+
+    def test_add_days(self):
+        dtime = dt.datetime(2019,11,30,23,59,36)
+        vdate = datetime_utils.add_days(dtime, 1)
+        assert vdate == dt.datetime(2019,12,1,23,59,36)
